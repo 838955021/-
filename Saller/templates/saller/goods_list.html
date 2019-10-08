@@ -1,0 +1,59 @@
+{% extends 'saller/base.html' %}
+{% block title %}
+    商品列表
+{% endblock %}
+{% block label %}
+    商品列表
+{% endblock %}
+{% block content %}
+    <table class="table">
+        <thead >
+
+            <tr>
+                <th>商品编码</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>商品数量</th>
+                <th>商品产地</th>
+                <th>商品保质期</th>
+                <th>操作</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+        {% for i in goods_list %}
+            <tr>
+                <th>{{ i.goods_number }}</th>
+                <th>{{ i.goods_name }}</th>
+                <th>{{ i.goods_price }}</th>
+                <th>{{ i.goods_count }}</th>
+                <th>{{ i.goods_location }}</th>
+                <th>{{ i.goods_safe_date }}</th>
+                <th>
+                    <button class="btn btn-primary">修改</button>
+                    {% if i.goods_status == 1 %}
+                        <a href="/Saller/goods_status/down/{{ i.id }}" type="button" class="btn btn-warning">下架</a>
+                    {% else %}
+                        <a href="/Saller/goods_status/up/{{ i.id }}" type="button" class="btn btn-warning">上架</a>
+                    {% endif %}
+                </th>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+    <ul style="float: right;margin-right: 50px" class="pagination" >
+        {% for foo in goods_all.page_range %}
+            <li >
+                {% if status == '0' %}
+                    <a href="/goods_list/0/{{ foo }}" class="page-link">{{ foo }}</a>
+                {% else %}
+                    <a href="/goods_list/1/{{ foo }}" class="page-link">{{ foo }}</a>
+                {% endif %}
+
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

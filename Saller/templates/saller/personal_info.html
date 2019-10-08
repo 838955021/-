@@ -1,0 +1,60 @@
+{% extends 'Saller/base.html' %}
+{% load static %}
+{% block title %}
+    个人中心
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table class="table" >
+        <tr>
+            <td rowspan="3" width="300px"><img src="/static/{{ user.photo }}" disabled alt="" style="height: 250px;width: 250px;">
+                <input id="photos" type="file" name="photo" style="display:none">
+            </td>
+            <th>邮箱</th>
+            <td><input type="text" name="email" value="{{ user.email }}" disabled></td>
+            <th>用户名</th>
+            <td><input type="text" name="username" value="{{ user.username }}" disabled></td>
+        </tr>
+        <tr>
+            <th>手机号</th>
+            <td><input type="text" name="phone_number" value="{{ user.phone_number }}" disabled></td>
+            <th>年龄</th>
+            <td><input type="number" name="age" value="{{ user.age }}" disabled></td>
+        </tr>
+        <tr>
+            <th>性别</th>
+            <td><input type="text" name="gender" value="{{ user.gender }}" disabled></td>
+            <th>地址</th>
+            <td><input type="text" name="address" value="{{ user.address }}" disabled></td>
+        </tr>
+        <tr>
+            <th >
+                <td colspan="3" style="text-align:center;">
+                    <input id="bj" class="btn btn-primary" type="button" value="编辑" >
+                    <input class="btn btn-primary" type="submit" value="提交" disabled>
+                </td>
+            </th>
+        </tr>
+    </table>
+
+    </form>
+{% endblock %}
+
+{% block style %}
+    <script src="{% static '/saller/vendor/jquery/jquery.min.js' %}"></script>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+    $("#bj").click(
+        function () {
+            $("input").removeAttr('disabled');
+            $("#photos").removeAttr('style');
+        }
+    )
+
+    </script>
+{% endblock %}

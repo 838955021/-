@@ -1,0 +1,41 @@
+{% extends 'saller/base.html' %}
+{% block title %}
+    商品列表
+{% endblock %}
+
+{% block label %}
+    商品列表
+
+
+{% endblock %}
+{% block content %}
+    <form action="" method="post" class="user" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <input type="text" name="goods_number" placeholder="商品编号" class="form-control form-control-user">
+        </div>
+        <div><input type="text" name="goods_name" placeholder="商品名字" class="form-control form-control-user">
+        </div>
+        <div><input type="text" name="goods_price" placeholder="商品价格" class="form-control form-control-user">
+        </div>
+        <div><input type="text" name="goods_count" placeholder="商品数量" class="form-control form-control-user">
+        </div>
+        <div><input type="text" name="goods_location" placeholder="产地" class="form-control form-control-user">
+        </div>
+        <div><input type="text" name="goods_safe_date" placeholder="保质期" class="form-control form-control-user">
+        </div>
+        <div>
+{#            <input type="text" name="goods_type" placeholder="类型" class="form-control form-control-user">#}
+            <select name="goods_type" class="btn btn-warning dropdown-toggle btn- user btn-block">
+                <option value="0">--商品类型--</option>
+                {% for foo in goods_type %}
+                    <option value="{{ foo.id }}">--{{ foo.type_label }}--</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div  class="form-group">
+            上传图片：<input type="file" name="pictuer" >
+        </div>
+        <input type="submit" value="添加商品">
+    </form>
+{% endblock %}
